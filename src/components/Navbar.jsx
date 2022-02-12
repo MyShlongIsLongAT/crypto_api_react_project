@@ -1,20 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
-	CssBaseline,
 	AppBar,
 	Toolbar,
 	IconButton,
-	Typography,
 	Button,
 	Box,
+	Container,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 
 const Navbar = () => {
 	return (
 		<>
-			<CssBaseline />
 			<Box sx={{ flexGrow: 1 }}>
 				<AppBar position="static">
 					<Toolbar>
@@ -23,16 +20,26 @@ const Navbar = () => {
 							edge="start"
 							color="inherit"
 							aria-label="menu"
-							sx={{ mr: 3 }}
+							sx={{ mr: 2 }}
 						>
 							<HomeIcon />
 						</IconButton>
-						<Typography variant="h6" component="div" sx={{ mr: 3 }}>
+						<Button
+							href="/"
+							varient="text"
+							color="inherit"
+							sx={{ mr: 2 }}
+						>
 							Homepage
-						</Typography>
-						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+						</Button>
+						<Button
+							href="/cryptocurrencies"
+							varient="text"
+							color="inherit"
+						>
 							Cryptocurrencies
-						</Typography>
+						</Button>
+						<Container sx={{ flexGrow: 1 }}></Container>
 						<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
 							Login
 						</Button>
