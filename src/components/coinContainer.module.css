@@ -1,0 +1,22 @@
+.wholeContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width:500px;
+    height:70px;
+
+    padding: 10px;
+    margin-bottom: 15px;
+
+    font-family: Arial;
+    
+    border-radius: 10px;
+    -webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+    box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+}
+
+.symbolCoin{
+    font-weight: bold;
+}

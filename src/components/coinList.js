@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
+import CoinContainer from "./coinContainer";
 import { coinContext } from "./coinContext";
-
-/* const getCoins = (coins) => {
-    let allCoins = [];
-    coins.data.coins.forEach((element) => {
-        allCoins.push(element);
-    });
-    return allCoins;
-} */
 
 const CoinList = () => {
   const data = useContext(coinContext);
-  return <div>{console.log(data.coins)}</div>;
+  let widgets = [];
+
+  data.coins.forEach((coin) => {
+      widgets.push(
+        <CoinContainer name={coin.name} price={coin.price} iconUrl={coin.iconUrl} symbol={coin.symbol}/>
+      );
+  });
+  return widgets;
 };
 
 export default CoinList;
