@@ -28,7 +28,7 @@ const Navbar = () => {
 							href="/"
 							varient="text"
 							color="inherit"
-							sx={{ mr: 2 }}
+							sx={{ mr: 2, display: 'block' }}
 						>
 							Homepage
 						</Button>
@@ -36,6 +36,7 @@ const Navbar = () => {
 							href="/cryptocurrencies"
 							varient="text"
 							color="inherit"
+							sx={{ display: 'block' }}
 						>
 							Cryptocurrencies
 						</Button>
@@ -43,7 +44,11 @@ const Navbar = () => {
 						<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
 							Login
 						</Button>
-						<Button variant="outlined" color="inherit">
+						<Button
+							variant="outlined"
+							color="inherit"
+							sx={{ minWidth: 90 }}
+						>
 							Sign Up
 						</Button>
 					</Toolbar>

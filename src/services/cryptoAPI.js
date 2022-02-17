@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 
-const Homepage = () => {
+const cryptoAPI = () => {
 	useEffect(() => {}, []);
 
-	return <div>Homepage</div>;
+	return <div>cryptoAPI</div>;
 };
 
-export default Homepage;
+export default cryptoAPI;
