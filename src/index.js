@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { CoinProvider } from "./components/coinContext";
+import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CoinProvider>
-      <App />
-    </CoinProvider>
+    <Router>
+      <CoinProvider>
+        <App />
+      </CoinProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
