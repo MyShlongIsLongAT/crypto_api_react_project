@@ -42,7 +42,7 @@ const Navbar = () => {
 						</Button>
 						<Container sx={{ flexGrow: 1 }}></Container>
 						<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
-							Login
+							Sign In
 						</Button>
 						<Button
 							variant="outlined"
