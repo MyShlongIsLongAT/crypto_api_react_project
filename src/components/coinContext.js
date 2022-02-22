@@ -7,21 +7,16 @@ export const CoinProvider = ({ children }) => {
 	const [coins, setCoins] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const fetchData = async () => {
-		const data = await axios.get(
-			'https://cors-anywhere.herokuapp.com/https://api.coinranking.com/v2/coins',
-			{
-				headers: {
-					'x-access-token': process.env.API_KEY,
-					'Content-Type': 'application / json',
-				},
-			}
-		);
-
-		console.log(data);
-		setCoins(...[data.data.data.coins]);
-		setLoading(false);
-	};
+  const fetchData = async () => {
+    const data = await axios.get("https://coinranking1.p.rapidapi.com/coins", {
+      headers: {
+        "x-rapidapi-host": "coinranking1.p.rapidapi.com",
+        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+      },
+    });
+    setCoins(...[data.data.data.coins]);
+    setLoading(false);
+  };
 
 	useEffect(() => {
 		if (coins && !coins.length) {
