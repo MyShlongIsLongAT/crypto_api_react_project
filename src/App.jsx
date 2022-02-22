@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './components';
@@ -24,6 +25,7 @@ const App = () => {
 			</div>
 		</div>
 	);
+
 };
 
 export default App;

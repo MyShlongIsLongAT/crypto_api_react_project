@@ -18,10 +18,12 @@ export const CoinProvider = ({ children }) => {
 			}
 		);
 
-		console.log(data);
+
+	
 		setCoins(...[data.data.data.coins]);
 		setLoading(false);
 	};
+
 
 	useEffect(() => {
 		if (coins && !coins.length) {
