@@ -1,11 +1,11 @@
-import React, { useState, createContext, useEffect } from "react";
-import axios from "axios";
+import React, { useState, createContext, useEffect } from 'react';
+import axios from 'axios';
 
 export const coinContext = createContext([]);
 
 export const CoinProvider = ({ children }) => {
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(true);
+	const [coins, setCoins] = useState([]);
+	const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     const data = await axios.get("https://coinranking1.p.rapidapi.com/coins", {
@@ -18,14 +18,14 @@ export const CoinProvider = ({ children }) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    if (coins && !coins.length) {
-      setLoading(true);
-    }
-    fetchData();
-  }, [loading]);
+	useEffect(() => {
+		if (coins && !coins.length) {
+			setLoading(true);
+		}
+		fetchData();
+	}, [loading]);
 
-  return (
-    <coinContext.Provider value={{ coins }}>{children}</coinContext.Provider>
-  );
+	return (
+		<coinContext.Provider value={{ coins }}>{children}</coinContext.Provider>
+	);
 };
