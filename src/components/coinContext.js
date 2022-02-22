@@ -20,11 +20,11 @@ export const CoinProvider = ({ children }) => {
     setLoading(false);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (coins && !coins.length) {
       setLoading(true);
     }
-    await fetchData();
+    fetchData();
   }, [loading]);
 
   return (

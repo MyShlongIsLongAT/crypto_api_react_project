@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 const Homepage = () => {
-	useEffect(() => {}, []);
-
 	return <div>Homepage</div>;
 };
 

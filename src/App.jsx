@@ -3,8 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components";
 import { Homepage, Cryptocurrencies } from "./pages";
 import "./App.css";
-import CoinList from "./components/coinList";
-import { CoinProvider } from "./components/coinContext";
 
 const App = () => {
   return (
@@ -24,9 +22,6 @@ const App = () => {
           </Routes>
         </div>
       </div>
-      <CoinProvider>
-        <CoinList />
-      </CoinProvider>
     </div>
   );
 };
