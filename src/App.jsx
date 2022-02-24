@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components";
 import { Homepage, Cryptocurrencies } from "./pages";
 import "./App.css";
-import { CoinProvider } from "./components/coinContext";
+import { CoinProvider } from "./services/coinContext";
+
 
 const App = () => {
   return (

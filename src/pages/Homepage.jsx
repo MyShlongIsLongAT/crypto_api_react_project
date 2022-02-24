@@ -1,15 +1,8 @@
-import React from 'react';
-import { GlobalStats } from '../components';
-import { StatsProvider } from '../services/statsContext';
+import React from "react";
+import { GlobalStats } from "../components";
 
 const Homepage = () => {
-	return (
-		<>
-			<StatsProvider>
-				<GlobalStats />
-			</StatsProvider>
-		</>
-	);
+  return <GlobalStats />;
 };
 
 export default Homepage;

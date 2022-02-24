@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { GlobalStatsCard as Card } from '../components';
-import { statsContext } from '../services/statsContext';
+import { coinContext } from '../services/coinContext';
 
 const GlobalStats = () => {
-	const data = useContext(statsContext);
+	const data = useContext(coinContext);
 	let widgets = [];
 
 	{
-		data.stats.forEach((value) => {
+		/* data.stats.forEach((value) => {
 			widgets.push(
 				<Card
 					total={value.total}
@@ -20,7 +20,7 @@ const GlobalStats = () => {
 					total24hVolume={value.total24hVolume}
 				/>
 			);
-		});
+		}); */
 	}
 
 	return (

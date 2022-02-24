@@ -16,7 +16,6 @@ export const CoinProvider = ({ children }) => {
         "x-rapidapi-key": process.env.REACT_APP_API_KEY,
       },
     });
-	
 	setStats(...[data.data.data.stats])
     setCoins(...[data.data.data.coins]);
     setLoading(false);

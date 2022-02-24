@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
 import CoinContainer from "./coinContainer";
-import { coinContext } from "./coinContext";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { coinContext } from "../services/coinContext";
 
 const CoinList = () => {
   const data = useContext(coinContext);
-  console.log(data.stats);
-  console.log(data.coins);
-
-
+  
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
