@@ -1,10 +1,10 @@
 import React, { useState, createContext, useEffect } from 'react';
 import axios from 'axios';
 
-export const coinContext = createContext([]);
+export const statsContext = createContext([]);
 
-export const CoinProvider = ({ children }) => {
-	const [coins, setCoins] = useState([]);
+export const StatsProvider = ({ children }) => {
+	const [stats, setStats] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	const fetchData = async () => {
@@ -17,18 +17,21 @@ export const CoinProvider = ({ children }) => {
 				},
 			}
 		);
-		setCoins(...[data.data.data.coins]);
-		setLoading(false);
+		setStats(...[data.data.data.stats]);
+		if (stats && !stats.length) {
+			setLoading(false);
+		} else {
+			setLoading(true);
+		}
 	};
 
 	useEffect(() => {
-		if (coins && !coins.length) {
-			setLoading(true);
-		}
 		fetchData();
 	}, [loading]);
 
 	return (
-		<coinContext.Provider value={{ coins }}>{children}</coinContext.Provider>
+		<statsContext.Provider value={{ stats }}>
+			{children}
+		</statsContext.Provider>
 	);
 };
