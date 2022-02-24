@@ -6,17 +6,17 @@ import { coinContext } from "../services/coinContext";
 
 const CoinList = () => {
   const data = useContext(coinContext);
-  
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
         >
           {data.coins.map((coin, index) => (
-            <Grid item xs={2} sm={4} md={4} key={index}>
+            <Grid item xs={2} sm={4} md={4} key={index} sx={{minWidth:490}}>
               <CoinContainer
                 name={coin.name}
                 price={coin.price}
