@@ -1,19 +1,25 @@
 import React from "react";
 import styles from "./coinContainer.module.css";
 
-const CoinContainer = (props) => {
+const coinContainer = (props) => {
   return (
     <div className={styles.wholeContainer}>
-      <div className={styles.symbolCoin}>{props.symbol}</div>
-      <div className={styles.textCoin}>
-        <h2>{props.name}</h2>
-        {props.price}
-      </div>
-      <div className={styles.imageCoin}>
-        <img src={props.iconUrl} width="50px" alt="Logo" />
-      </div>
+      <table>
+        <tr>
+          <td width="100">
+            <img src={props.iconUrl} width="50px" alt="Logo" />
+          </td>
+          <td width="270">
+            <h3>{props.name}</h3>
+            <span>{props.symbol}</span>
+          </td>
+          <td width="100">
+            <h5>{"$ " + parseFloat(props.price).toFixed(5)}</h5>
+          </td>
+        </tr>
+      </table>
     </div>
   );
 };
 
-export default CoinContainer;
+export default coinContainer;

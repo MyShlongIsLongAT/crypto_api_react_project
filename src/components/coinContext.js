@@ -5,6 +5,8 @@ export const coinContext = createContext([]);
 
 export const CoinProvider = ({ children }) => {
 	const [coins, setCoins] = useState([]);
+	const [stats, setStats] = useState([])
+
 	const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -14,6 +16,8 @@ export const CoinProvider = ({ children }) => {
         "x-rapidapi-key": process.env.REACT_APP_API_KEY,
       },
     });
+	
+	setStats(...[data.data.data.stats])
     setCoins(...[data.data.data.coins]);
     setLoading(false);
   };
@@ -26,6 +30,6 @@ export const CoinProvider = ({ children }) => {
 	}, [loading]);
 
 	return (
-		<coinContext.Provider value={{ coins }}>{children}</coinContext.Provider>
+		<coinContext.Provider value={{ coins, stats }}>{children}</coinContext.Provider>
 	);
 };
