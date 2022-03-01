@@ -1,21 +1,41 @@
-.wholeContainer{
+.wholeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 80px;
+
+  padding: 10px;
+
+  font-family: Arial;
+
+  border-radius: 10px;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
+}
+
+.symbolCoin {
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 1100px) {
+  .wholeContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    width:490px;
-    height:80px;
+    width: 100%;
+    height: 80px;
 
     padding: 10px;
 
     font-family: Arial;
-    
+
     border-radius: 10px;
     -webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
     box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
-}
-
-.symbolCoin{
-    font-weight: bold;
+  }
 }
