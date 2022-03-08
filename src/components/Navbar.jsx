@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import Logo from './logoReact.svg';
 
 const pages = [
 	{ name: 'Homepage', link: '/' },
@@ -37,7 +38,7 @@ const ResponsiveAppBar = () => {
 						component="div"
 						sx={{ mr: 2, display: { xs: 'none', sm: 'flex' } }}
 					>
-						LOGO
+						<img src={Logo} width="45px" alt="" />
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
@@ -98,7 +99,7 @@ const ResponsiveAppBar = () => {
 						component="div"
 						sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}
 					>
-						LOGO
+						<img src={Logo} width="45px" alt="" />
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}>
