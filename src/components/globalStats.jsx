@@ -1,37 +1,29 @@
 import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { GlobalStatsCard as Card } from '../components';
+import { GlobalStatsCard } from '../components';
 import { coinContext } from '../services/coinContext';
 
 const GlobalStats = () => {
 	const data = useContext(coinContext);
 	let widgets = [];
 
-	{
-		/* data.stats.forEach((value) => {
-			widgets.push(
-				<Card
-					total={value.total}
-					totalCoins={value.totalCoins}
-					totalMarkets={value.totalMarkets}
-					totalExchanges={value.totalExchanges}
-					totalMarketCap={value.totalMarketCap}
-					total24hVolume={value.total24hVolume}
-				/>
-			);
-		}); */
+	for (const val in data.stats) {
+		widgets.push(
+			<GlobalStatsCard title={val} value={data.stats[val]} key={val} />
+		);
 	}
 
 	return (
 		<>
-			<Box spacing={2} sx={{ flexGrow: 1 }}>
+			<Box sx={{ backgroundColor: 'green', marginTop: '24px' }}>
 				<Grid
 					container
-					spacing={2}
-					justifyContent="center"
-					alignItems="center"
-				></Grid>
+					spacing={{ xs: 2, md: 3 }}
+					columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
+				>
+					{widgets}
+				</Grid>
 			</Box>
 		</>
 	);
