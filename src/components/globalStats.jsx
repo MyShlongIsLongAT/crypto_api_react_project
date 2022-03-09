@@ -6,11 +6,27 @@ import { coinContext } from '../services/coinContext';
 
 const GlobalStats = () => {
 	const data = useContext(coinContext);
+	delete data.stats.total;
+
+	const stats = {
+		'Total Cryptocurrencies': data.stats.totalCoins,
+		'Total Markets': data.stats.totalMarkets,
+		'Total Exchanges': data.stats.totalExchanges,
+		'Total Market Cap': data.stats.totalMarketCap,
+		'Total 24h Volume': data.stats.total24hVolume,
+	};
+
+	console.log(stats);
+
 	let widgets = [];
 
-	for (const val in data.stats) {
+	if (!stats['Total Cryptocurrencies']) {
+		return <div>Fetching...</div>;
+	}
+
+	for (const val in stats) {
 		widgets.push(
-			<GlobalStatsCard title={val} value={data.stats[val]} key={val} />
+			<GlobalStatsCard title={val} value={stats[val]} key={val} />
 		);
 	}
 
