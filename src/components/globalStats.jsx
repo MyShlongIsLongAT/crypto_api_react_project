@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { GlobalStatsCard } from '../components';
 import { coinContext } from '../services/coinContext';
+import { TailSpin } from 'react-loader-spinner';
 
 const GlobalStats = () => {
 	const data = useContext(coinContext);
@@ -21,7 +22,19 @@ const GlobalStats = () => {
 	let widgets = [];
 
 	if (!stats['Total Cryptocurrencies']) {
-		return <div>Fetching...</div>;
+		return (
+			<>
+				<Box
+					sx={{
+						mx: 'auto',
+						width: '150px',
+						marginTop: '40px',
+					}}
+				>
+					<TailSpin color="#1976D2" height={150} width={150} />
+				</Box>
+			</>
+		);
 	}
 
 	for (const val in stats) {
