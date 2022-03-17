@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Navbar, CryptoDetail } from './components';
 import { Homepage, Cryptocurrencies } from './pages';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
 import { CoinProvider } from './services/coinContext';
 
@@ -22,8 +23,8 @@ const App = () => {
 								element={<Cryptocurrencies />}
 							/>
 							<Route
-								path="/cryptocurrencies/:id"
-								component={CryptoDetail}
+								path="/crypto/:id"
+								element={<CryptoDetail />}
 							></Route>
 						</Routes>
 					</div>

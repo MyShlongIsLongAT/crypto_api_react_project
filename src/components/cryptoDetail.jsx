@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CryptoDetail = () => {
-	const [crypto, setCrypto] = useState();
-
-	return <div>cryptoDetail</div>;
+	const coin = useLocation();
+	console.log(coin);
+	return <img src={coin.state.iconUrl}></img>;
 };
 
 export default CryptoDetail;
