@@ -23,8 +23,8 @@ const App = () => {
 								element={<Cryptocurrencies />}
 							/>
 							<Route
-								path="/cryptocurrencies/:id"
-								component={CryptoDetail}
+								path="/crypto/:id"
+								element={<CryptoDetail />}
 							></Route>
 						</Routes>
 					</div>
