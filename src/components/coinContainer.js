@@ -30,16 +30,16 @@ const CoinContainer = (props) => {
         </table>
       )}
       {!matches && (
-        <table>
+        <table style={{width:"100%"}}>
           <tr>
-            <td width="100">
+            <td width="30%">
               <img src={props.iconUrl} width="50px" alt="Logo" />
             </td>
-            <td width="260">
+            <td width="30%">
               <h3>{props.name}</h3>
               <span>{props.symbol}</span>
             </td>
-            <td width="110">
+            <td width="40%">
               <h5>{"$ " + parseFloat(props.price).toFixed(5)}</h5>
             </td>
           </tr>
