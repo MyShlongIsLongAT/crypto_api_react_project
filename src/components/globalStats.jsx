@@ -45,14 +45,30 @@ const GlobalStats = () => {
 
 	return (
 		<>
-			<Box sx={{ backgroundColor: 'green', marginTop: '24px' }}>
-				<Grid
-					container
-					spacing={{ xs: 2, md: 3 }}
-					columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
+			<Box
+				sx={{
+					width: '70vw',
+					height: '100vw',
+					mx: 'auto',
+					marginTop: '23px',
+					backgroundColor: 'red',
+				}}
+			>
+				<Box
+					sx={{
+						mx: 'auto',
+						width: '700px',
+						backgroundColor: 'blue',
+					}}
 				>
-					{widgets}
-				</Grid>
+					<Grid
+						container
+						spacing={{ xs: 2, md: 3 }}
+						columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
+					>
+						{widgets}
+					</Grid>
+				</Box>
 			</Box>
 		</>
 	);
