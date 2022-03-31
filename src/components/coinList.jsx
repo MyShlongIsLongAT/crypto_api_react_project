@@ -34,12 +34,12 @@ const CoinList = () => {
                 md={4}
                 key={index}
                 
-              >
-                <CoinContainer
-                  price={coin.price}
-                  iconUrl={coin.iconUrl}
-                  symbol={coin.symbol}
-                />
+              ><CoinContainer
+              uuid={coin.uuid}
+              price={coin.price}
+              iconUrl={coin.iconUrl}
+              symbol={coin.symbol}
+            /> 
               </Grid>
             ))}
           </Grid>
@@ -62,6 +62,7 @@ const CoinList = () => {
               
             >
               <CoinContainer
+                uuid={coin.uuid}
                 name={coin.name}
                 price={coin.price}
                 iconUrl={coin.iconUrl}
