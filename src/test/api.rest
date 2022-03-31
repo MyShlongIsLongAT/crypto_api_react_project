@@ -1,0 +1,3 @@
+GET https://coinranking1.p.rapidapi.com/coins
+    x-rapidapi-host: coinranking1.p.rapidapi.com
+    x-rapidapi-key:d39e63ad46msh8db4f311b89d9d8p1ce364jsnf31f3026f296
