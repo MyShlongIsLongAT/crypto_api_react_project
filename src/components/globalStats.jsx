@@ -47,20 +47,22 @@ const GlobalStats = () => {
 		<>
 			<Box
 				sx={{
-					width: '70vw',
+					width: '90vw',
 					height: '100vw',
 					mx: 'auto',
-					marginTop: '23px',
-					backgroundColor: 'red',
+
+					backgroundColor: '#d9d9d9',
 				}}
 			>
 				<Box
 					sx={{
 						mx: 'auto',
 						width: '700px',
-						backgroundColor: 'blue',
 					}}
 				>
+					<Grid item xs={12}>
+						<Typography>Global Stats</Typography>
+					</Grid>
 					<Grid
 						container
 						spacing={{ xs: 2, md: 3 }}
