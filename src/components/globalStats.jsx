@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Box, Grid, Typography } from '@mui/material';
 import { GlobalStatsCard } from '../components';
 import { coinContext } from '../services/coinContext';
 import { TailSpin } from 'react-loader-spinner';
@@ -50,27 +49,18 @@ const GlobalStats = () => {
 					width: '90vw',
 					height: '100vw',
 					mx: 'auto',
-
 					backgroundColor: '#d9d9d9',
+					marginTop: '27px',
 				}}
 			>
-				<Box
-					sx={{
-						mx: 'auto',
-						width: '700px',
-					}}
+				<Grid
+					container
+					justifyContent="center"
+					spacing={5}
+					sx={{ backgroundColor: 'red' }}
 				>
-					<Grid item xs={12}>
-						<Typography>Global Stats</Typography>
-					</Grid>
-					<Grid
-						container
-						spacing={{ xs: 2, md: 3 }}
-						columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
-					>
-						{widgets}
-					</Grid>
-				</Box>
+					{widgets}
+				</Grid>
 			</Box>
 		</>
 	);

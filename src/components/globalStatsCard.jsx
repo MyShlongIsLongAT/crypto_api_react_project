@@ -10,16 +10,14 @@ const GlobalStatsCard = (props) => {
 	});
 
 	return (
-		<>
-			<Grid item xs={3} sm={4} md={4} key={props.title}>
-				<Card sx={{ minWidth: 100, maxWidth: 200 }}>
-					<CardContent>
-						<Typography>{props.title}</Typography>
-						<Typography>{value}</Typography>
-					</CardContent>
-				</Card>
-			</Grid>
-		</>
+		<Grid item key={props.title}>
+			<Card>
+				<CardContent>
+					<Typography>{props.title}</Typography>
+					<Typography>{value}</Typography>
+				</CardContent>
+			</Card>
+		</Grid>
 	);
 };
 
