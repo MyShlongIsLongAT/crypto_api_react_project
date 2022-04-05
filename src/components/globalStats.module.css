@@ -1,14 +1,15 @@
 .flexBox {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 	padding: 2em 2em 2em 2em;
-	background-color: aqua;
 }
 
-.globalStats {
+.Card {
 	width: 200px;
 	min-width: 200px;
+	margin-bottom: 1em;
 	text-align: center;
 	-webkit-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
 	-moz-box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, 0.19);
