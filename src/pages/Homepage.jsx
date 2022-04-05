@@ -4,7 +4,7 @@ import styles from './Homepage.module.css';
 
 const Homepage = () => {
 	return (
-		<div className={styles.greyBox}>
+		<div className={styles.designBox}>
 			<GlobalStats />
 		</div>
 	);
