@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { GlobalStatsCard } from '../components';
 import { coinContext } from '../services/coinContext';
 import { TailSpin } from 'react-loader-spinner';
+import styles from './globalStats.module.css';
 
 const GlobalStats = () => {
 	const data = useContext(coinContext);
@@ -44,24 +45,10 @@ const GlobalStats = () => {
 
 	return (
 		<>
-			<Box
-				sx={{
-					width: '90vw',
-					height: '100vw',
-					mx: 'auto',
-					backgroundColor: '#d9d9d9',
-					marginTop: '27px',
-				}}
-			>
-				<Grid
-					container
-					justifyContent="center"
-					spacing={5}
-					sx={{ backgroundColor: 'red' }}
-				>
-					{widgets}
-				</Grid>
-			</Box>
+			<div className={styles.heading}>
+				<Typography variant="h3">Global Stats</Typography>
+			</div>
+			<div className={styles.flexBox}>{widgets}</div>
 		</>
 	);
 };
