@@ -1,6 +1,7 @@
 import React from 'react';
 import millify from 'millify';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
+import styles from './globalStats.module.css';
 
 const GlobalStatsCard = (props) => {
 	const value = millify(props.value, {
@@ -10,16 +11,16 @@ const GlobalStatsCard = (props) => {
 	});
 
 	return (
-		<>
-			<Grid item xs={3} sm={4} md={4} key={props.title}>
-				<Card sx={{ minWidth: 100, maxWidth: 200 }}>
-					<CardContent>
-						<Typography>{props.title}</Typography>
-						<Typography>{value}</Typography>
-					</CardContent>
-				</Card>
-			</Grid>
-		</>
+		<div className={styles.globalStats}>
+			<Card>
+				<CardContent>
+					<Typography sx={{ fontWeight: 'bold' }}>
+						{props.title}
+					</Typography>
+					<Typography>{value}</Typography>
+				</CardContent>
+			</Card>
+		</div>
 	);
 };
 
