@@ -11,7 +11,7 @@ const GlobalStatsCard = (props) => {
 	});
 
 	return (
-		<div className={styles.globalStats}>
+		<div className={styles.Card}>
 			<Card>
 				<CardContent>
 					<Typography sx={{ fontWeight: 'bold' }}>

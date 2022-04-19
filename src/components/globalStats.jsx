@@ -17,8 +17,6 @@ const GlobalStats = () => {
 		'Total 24h Volume': data.stats.total24hVolume,
 	};
 
-	console.log(stats);
-
 	let widgets = [];
 
 	if (!stats['Total Cryptocurrencies']) {
