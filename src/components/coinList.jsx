@@ -35,7 +35,7 @@ const CoinList = () => {
 						{data.coins.map((coin, index) => (
 							<Grid item xs={3} sm={4} md={4} key={index}>
 								<Link
-									to={'/crypto/' + coin.symbol}
+									to={'/cryptocurrencies/' + coin.symbol}
 									style={remove_Link_Decoration}
 									state={coin}
 								>
@@ -60,7 +60,7 @@ const CoinList = () => {
 						{data.coins.map((coin, index) => (
 							<Grid item xs={3} sm={4} md={4} key={index}>
 								<Link
-									to={'/crypto/' + coin.symbol}
+									to={'/cryptocurrencies/' + coin.symbol}
 									style={remove_Link_Decoration}
 									state={coin}
 								>

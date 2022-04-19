@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./coinContainer.module.css";
+import { digitLimiter } from "../services/globalFunctions.js";
 
 const CoinContainer = (props) => {
   const [matches, setMatches] = useState(
@@ -13,40 +13,41 @@ const CoinContainer = (props) => {
       .addEventListener("change", (e) => setMatches(e.matches));
   }, []);
 
-  let navigate = useNavigate();
-
-
   return (
     <div className={styles.wholeContainer}>
       {matches && (
-        <table style={{width:"100%"}}>
-          <tr>
-            <td width="30%">
-              <img src={props.iconUrl} width="30px" alt="Logo" />
-            </td>
-            <td width="30%">
-              <h3>{props.symbol}</h3>
-            </td>
-            <td width="40%">
-              <h5>{"$ " + parseFloat(props.price).toFixed(5)}</h5>
-            </td>
-          </tr>
+        <table style={{ width: "100%" }}>
+          <tbody>
+            <tr>
+              <td width="30%">
+                <img src={props.iconUrl} width="30px" alt="Logo" />
+              </td>
+              <td width="30%">
+                <h3>{props.symbol}</h3>
+              </td>
+              <td width="40%">
+                <h5>{"$ " + digitLimiter(props.price)}</h5>
+              </td>
+            </tr>
+          </tbody>
         </table>
       )}
       {!matches && (
-        <table style={{width:"100%"}}>
-          <tr>
-            <td width="30%">
-              <img src={props.iconUrl} width="50px" alt="Logo" />
-            </td>
-            <td width="30%">
-              <h3>{props.name}</h3>
-              <span>{props.symbol}</span>
-            </td>
-            <td width="40%">
-              <h5>{"$ " + parseFloat(props.price).toFixed(5)}</h5>
-            </td>
-          </tr>
+        <table style={{ width: "100%" }}>
+          <tbody>
+            <tr>
+              <td width="30%">
+                <img src={props.iconUrl} width="50px" alt="Logo" />
+              </td>
+              <td width="30%">
+                <h3>{props.name}</h3>
+                <span>{props.symbol}</span>
+              </td>
+              <td width="40%">
+                <h5>{"$ " + digitLimiter(props.price)}</h5>
+              </td>
+            </tr>
+          </tbody>
         </table>
       )}
     </div>
