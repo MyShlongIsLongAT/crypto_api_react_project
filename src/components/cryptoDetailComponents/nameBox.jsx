@@ -17,12 +17,12 @@ const NameBox = (props) => {
               <h1>{coinInfo.name}</h1>
               <span>{coinInfo.symbol}</span>
             </td>
-            <td width="30%">{digitLimiter(coinInfo.price)}</td>
+            <td width="30%" style={{textAlign:"right"}}>{digitLimiter(coinInfo.price)}</td>
           </tr>
         </tbody>
       </table>
 
-      <div className={styles.coinInfoBox}>
+      <div className={styles.coinInfoBox} width="100%">
         <h3>Über {coinInfo.symbol}:</h3>
         Adipisicing id irure enim sunt labore. Aute irure deserunt adipisicing
         Lorem sunt quis aute tempor. Laborum exercitation occaecat in dolor

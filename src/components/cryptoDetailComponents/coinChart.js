@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./coinChart.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,14 +26,30 @@ const CoinChart = (props) => {
   const [coinStats] = useState(props.coinStats);
 
   const options = {
-    responsive: true,
+    responsive:true,
     plugins: {
       legend: {
-        position: "bottom",
+        display:false,
       },
       title: {
         display: true,
-        text: "Price of "+coinStats.name,
+        text: "Price of " + coinStats.name,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Value in US$",
+        },
+        grid: {
+          display: false,
+        },
       },
     },
   };
@@ -78,6 +95,10 @@ const CoinChart = (props) => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <div className={styles.gridBox}>
+      <Line options={options} data={data} />
+    </div>
+  );
 };
 export default CoinChart;
