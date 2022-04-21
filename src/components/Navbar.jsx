@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from './logoReact.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import { v4 as uuidv4 } from 'uuid';
 
 const pages = [
 	{ name: 'Homepage', link: '/' },
@@ -197,13 +198,23 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 						>
 							Sign In
 						</Button>
-						<Button
-							variant="outlined"
-							color="inherit"
-							sx={{ minWidth: 90 }}
+						<Link
+							to="/signup"
+							key={uuidv4()}
+							style={{ textDecoration: 'none' }}
 						>
-							Sign Up
-						</Button>
+							<Button
+								variant="contained"
+								color="inherit"
+								sx={{
+									minWidth: 90,
+									color: 'white',
+									backgroundColor: '#05014f',
+								}}
+							>
+								Sign Up
+							</Button>
+						</Link>
 					</Box>
 				</Toolbar>
 			</Container>
