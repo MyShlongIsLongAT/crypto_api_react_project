@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import { coinContext } from '../services/coinContext';
 import { Link } from 'react-router-dom';
 
-const CoinList = () => {
+const CoinList = ({ search }) => {
 	const data = useContext(coinContext);
+	const coins = data.coins;
 
 	const [matches, setMatches] = useState(
 		window.matchMedia('(max-width: 1046px)').matches
@@ -32,21 +33,25 @@ const CoinList = () => {
 						spacing={{ xs: 2, md: 3 }}
 						columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
 					>
-						{data.coins.map((coin, index) => (
-							<Grid item xs={3} sm={4} md={4} key={index}>
-								<Link
-									to={'/cryptocurrencies/' + coin.symbol}
-									style={remove_Link_Decoration}
-									state={coin}
-								>
-									<CoinContainer
-										price={coin.price}
-										iconUrl={coin.iconUrl}
-										symbol={coin.symbol}
-									/>
-								</Link>
-							</Grid>
-						))}
+						{coins
+							.filter((coin) =>
+								coin.name.toLowerCase().includes(search.toLowerCase())
+							)
+							.map((coin, index) => (
+								<Grid item xs={3} sm={4} md={4} key={index}>
+									<Link
+										to={'/cryptocurrencies/' + coin.symbol}
+										style={remove_Link_Decoration}
+										state={coin}
+									>
+										<CoinContainer
+											price={coin.price}
+											iconUrl={coin.iconUrl}
+											symbol={coin.symbol}
+										/>
+									</Link>
+								</Grid>
+							))}
 					</Grid>
 				</Box>
 			)}
@@ -57,22 +62,26 @@ const CoinList = () => {
 						spacing={{ xs: 2, md: 3 }}
 						columns={{ s: 3, xs: 3, sm: 8, md: 12 }}
 					>
-						{data.coins.map((coin, index) => (
-							<Grid item xs={3} sm={4} md={4} key={index}>
-								<Link
-									to={'/cryptocurrencies/' + coin.symbol}
-									style={remove_Link_Decoration}
-									state={coin}
-								>
-									<CoinContainer
-										name={coin.name}
-										price={coin.price}
-										iconUrl={coin.iconUrl}
-										symbol={coin.symbol}
-									/>
-								</Link>
-							</Grid>
-						))}
+						{coins
+							.filter((coin) =>
+								coin.name.toLowerCase().includes(search.toLowerCase())
+							)
+							.map((coin, index) => (
+								<Grid item xs={3} sm={4} md={4} key={index}>
+									<Link
+										to={'/cryptocurrencies/' + coin.symbol}
+										style={remove_Link_Decoration}
+										state={coin}
+									>
+										<CoinContainer
+											name={coin.name}
+											price={coin.price}
+											iconUrl={coin.iconUrl}
+											symbol={coin.symbol}
+										/>
+									</Link>
+								</Grid>
+							))}
 					</Grid>
 				</Box>
 			)}

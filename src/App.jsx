@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Navbar,CryptoDetail} from './components';
+import { Navbar, CryptoDetail } from './components';
 import { Homepage, Cryptocurrencies } from './pages';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
 import { CoinProvider } from './services/coinContext';
 
 const App = () => {
+	const [searchTerm, setSearchTerm] = useState('');
+
+	const searchHandler = (search) => {
+		setSearchTerm(search);
+	};
+
 	return (
 		<div className="app">
 			<div className="navbar">
-				<Navbar />
+				<Navbar searchHandler={searchHandler} />
 			</div>
 			<div className="main">
 				<CoinProvider>
@@ -20,7 +26,7 @@ const App = () => {
 							<Route
 								exact
 								path="/cryptocurrencies"
-								element={<Cryptocurrencies />}
+								element={<Cryptocurrencies search={searchTerm} />}
 							/>
 							<Route
 								path="/cryptocurrencies/:id"
