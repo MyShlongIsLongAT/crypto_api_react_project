@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Navbar, CryptoDetail } from './components';
-import { Homepage, Cryptocurrencies, SignUp, Account } from './pages';
+import { Navbar, CryptoDetail, ProtectedRoute } from './components';
+import { Homepage, Cryptocurrencies, SignUp, Account, SignIn } from './pages';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
 import { CoinProvider } from './services/coinContext';
@@ -35,7 +35,16 @@ const App = () => {
 									element={<CryptoDetail />}
 								/>
 								<Route exact path="/signup" element={<SignUp />} />
-								<Route exact path="/account" element={<Account />} />
+								<Route exact path="signin" element={<SignIn />} />
+								<Route
+									exact
+									path="/account"
+									element={
+										<ProtectedRoute>
+											<Account></Account>
+										</ProtectedRoute>
+									}
+								/>
 							</Routes>
 						</div>
 					</CoinProvider>

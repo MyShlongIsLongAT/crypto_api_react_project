@@ -191,13 +191,19 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 					{getSearch()}
 
 					<Box sx={{ flexGrow: 0 }}>
-						<Button
-							variant="outlined"
-							color="inherit"
-							sx={{ mr: 2, minWidth: 90 }}
+						<Link
+							to="/signin"
+							key={uuidv4()}
+							style={{ textDecoration: 'none' }}
 						>
-							Sign In
-						</Button>
+							<Button
+								variant="outlined"
+								color="inherit"
+								sx={{ mr: 2, minWidth: 90, color: 'white' }}
+							>
+								Sign In
+							</Button>
+						</Link>
 						<Link
 							to="/signup"
 							key={uuidv4()}
@@ -207,6 +213,10 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 								variant="contained"
 								color="inherit"
 								sx={{
+									'&:hover': {
+										color: 'white',
+										backgroundColor: '#0a02a6',
+									},
 									minWidth: 90,
 									color: 'white',
 									backgroundColor: '#05014f',
