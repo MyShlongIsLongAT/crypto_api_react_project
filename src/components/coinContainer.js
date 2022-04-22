@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./coinContainer.module.css";
 import { digitLimiter } from "../services/globalFunctions.js";
+import { DigitLimiter } from "./index.js";
 
 const CoinContainer = (props) => {
   const [matches, setMatches] = useState(
@@ -26,7 +27,7 @@ const CoinContainer = (props) => {
                 <h3>{props.symbol}</h3>
               </td>
               <td width="40%">
-                <h5>{"$ " + digitLimiter(props.price)}</h5>
+                <h5>{"$ " + DigitLimiter(props.price)}</h5>
               </td>
             </tr>
           </tbody>
