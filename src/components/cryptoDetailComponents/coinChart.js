@@ -78,8 +78,6 @@ const CoinChart = (props) => {
     ],
   };
 
-  console.log(coinStats.sparkline);
-
   return (
     <div className={styles.gridBox}>
       <Line options={options} data={data} />

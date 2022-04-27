@@ -69,6 +69,7 @@ const CoinList = () => {
 										price={coin.price}
 										iconUrl={coin.iconUrl}
 										symbol={coin.symbol}
+										change={coin.change}
 									/>
 								</Link>
 							</Grid>

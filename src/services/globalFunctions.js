@@ -3,8 +3,14 @@ import moment from "moment";
 export let digitLimiter = (number) => {
   let limitedNumber = "";
   let numberArray = Array.from(number);
-  for (let i = 0; i < 7; i++) {
-    limitedNumber += numberArray[i].toString();
+  if (numberArray[1] === "."){
+    numberArray.unshift("0");
+  }
+  for (let i = 0; i < 8; i++) {
+    if(numberArray.length <= i){
+      return limitedNumber;
+    }
+    limitedNumber += numberArray[i];
   }
   return limitedNumber;
 };
@@ -18,3 +24,11 @@ export let timeOneDay = (hoursPerDay) => {
   }
   return(time); //do this for all 24 hours
 };
+
+export let checkChange = (change) =>{
+  let changeAsArray = [...change];
+  if(changeAsArray[0]==='-'){
+      return false;
+  }
+  return true;
+}
