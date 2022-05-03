@@ -5,3 +5,4 @@ export { default as CryptoDetail } from "../pages/cryptoDetail";
 export { digitLimiter as DigitLimiter} from "../services/globalFunctions.js";
 export { timeOneDay as TimeOneDay} from "../services/globalFunctions.js";
 export { checkChange as CheckChange} from "../services/globalFunctions.js";
+export { addPlus as AddPlus} from "../services/globalFunctions.js";

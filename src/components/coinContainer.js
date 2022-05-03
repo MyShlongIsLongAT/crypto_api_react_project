@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./coinContainer.module.css";
-import { DigitLimiter, CheckChange } from "./index.js";
+import { DigitLimiter, CheckChange, AddPlus } from "./index.js";
 
 const CoinContainer = (props) => {
   const [matches, setMatches] = useState(
@@ -51,15 +51,25 @@ const CoinContainer = (props) => {
                 <span>{props.symbol}</span>
               </td>
               <td
-                width="40%"
+              width="30%"
+              className={
+                CheckChange(props.change)
+                  ? styles.positivChange
+                  : styles.negativChange
+              }
+              style={{ textAlign: "right" }}
+            >
+              ${DigitLimiter(props.price)}
+              <div
                 className={
                   CheckChange(props.change)
                     ? styles.positivChange
                     : styles.negativChange
                 }
               >
-                <h5>{"$ " + DigitLimiter(props.price)}</h5>
-              </td>
+                {AddPlus(props.change)}%
+              </div>
+            </td>
             </tr>
           </tbody>
         </table>
