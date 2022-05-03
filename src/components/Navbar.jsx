@@ -131,7 +131,9 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 			}
 		};
 
-		if (user) {
+		if (user === undefined) {
+			return <></>;
+		} else if (user) {
 			return (
 				<Box sx={{ flexGrow: 0 }}>
 					<Tooltip title="Open settings">
