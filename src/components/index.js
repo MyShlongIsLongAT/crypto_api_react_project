@@ -6,4 +6,3 @@ export { default as ProtectedRoute } from './ProtectedRoute';
 export { digitLimiter as DigitLimiter } from '../services/globalFunctions.js';
 export { timeOneDay as TimeOneDay } from '../services/globalFunctions.js';
 export { checkChange as CheckChange } from '../services/globalFunctions.js';
-export { addPlus as AddPlus } from '../services/globalFunctions.js';

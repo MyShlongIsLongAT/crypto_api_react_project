@@ -111,6 +111,8 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 					</Search>
 				</Box>
 			);
+		} else {
+			return <></>;
 		}
 	};
 
