@@ -15,11 +15,15 @@ import Logo from './logoReact.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { v4 as uuidv4 } from 'uuid';
+import { UserAuth } from '../services/authContext';
+import { Avatar, Tooltip } from '@mui/material';
 
 const pages = [
 	{ name: 'Homepage', link: '/' },
 	{ name: 'Cryptocurrencies', link: '/cryptocurrencies' },
 ];
+
+const settings = [{ name: 'Account', link: '/account' }];
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -70,6 +74,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const ResponsiveAppBar = ({ searchHandler }) => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
+	const [anchorElUser, setAnchorElUser] = React.useState(null);
 	const location = useLocation();
 
 	const handleOpenNavMenu = (event) => {
@@ -78,6 +83,14 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
+	};
+
+	const handleOpenUserMenu = (event) => {
+		setAnchorElUser(event.currentTarget);
+	};
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
 	};
 
 	const getSearch = () => {
@@ -100,6 +113,123 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 			);
 		} else {
 			return <></>;
+		}
+	};
+
+	const GetUserWidget = () => {
+		const { user, logout } = UserAuth();
+
+		console.log(user);
+
+		const handleLogout = async () => {
+			try {
+				await logout();
+
+				console.log('You are logged out');
+			} catch (e) {
+				console.log(e.message);
+			}
+		};
+
+		if (user === undefined) {
+			return <></>;
+		} else if (user) {
+			return (
+				<Box sx={{ flexGrow: 0 }}>
+					<Tooltip title="Open settings">
+						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+							<Avatar
+								alt="Remy Sharp"
+								src="/static/images/avatar/2.jpg"
+							/>
+						</IconButton>
+					</Tooltip>
+					<Menu
+						sx={{ mt: '45px' }}
+						id="menu-appbar"
+						anchorEl={anchorElUser}
+						anchorOrigin={{
+							vertical: 'top',
+							horizontal: 'right',
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: 'top',
+							horizontal: 'right',
+						}}
+						open={Boolean(anchorElUser)}
+						onClose={handleCloseUserMenu}
+					>
+						{settings.map((setting) => (
+							<Link
+								to={setting.link}
+								key={setting.name}
+								style={{ textDecoration: 'none' }}
+							>
+								<MenuItem
+									key={setting.name}
+									onClick={handleCloseUserMenu}
+								>
+									<Typography
+										textAlign="center"
+										sx={{ color: 'black' }}
+									>
+										{setting.name}
+									</Typography>
+								</MenuItem>
+							</Link>
+						))}
+						<MenuItem
+							key="Logout"
+							onClick={() => {
+								handleLogout();
+								handleCloseUserMenu();
+							}}
+						>
+							<Typography textAlign="center">Logout</Typography>
+						</MenuItem>
+					</Menu>
+				</Box>
+			);
+		} else {
+			return (
+				<Box sx={{ flexGrow: 0 }}>
+					<Link
+						to="/signin"
+						key={uuidv4()}
+						style={{ textDecoration: 'none' }}
+					>
+						<Button
+							variant="outlined"
+							color="inherit"
+							sx={{ mr: 2, minWidth: 90, color: 'white' }}
+						>
+							Sign In
+						</Button>
+					</Link>
+					<Link
+						to="/signup"
+						key={uuidv4()}
+						style={{ textDecoration: 'none' }}
+					>
+						<Button
+							variant="contained"
+							color="inherit"
+							sx={{
+								'&:hover': {
+									color: 'white',
+									backgroundColor: '#0a02a6',
+								},
+								minWidth: 90,
+								color: 'white',
+								backgroundColor: '#05014f',
+							}}
+						>
+							Sign Up
+						</Button>
+					</Link>
+				</Box>
+			);
 		}
 	};
 	return (
@@ -189,43 +319,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 						))}
 					</Box>
 					{getSearch()}
-
-					<Box sx={{ flexGrow: 0 }}>
-						<Link
-							to="/signin"
-							key={uuidv4()}
-							style={{ textDecoration: 'none' }}
-						>
-							<Button
-								variant="outlined"
-								color="inherit"
-								sx={{ mr: 2, minWidth: 90, color: 'white' }}
-							>
-								Sign In
-							</Button>
-						</Link>
-						<Link
-							to="/signup"
-							key={uuidv4()}
-							style={{ textDecoration: 'none' }}
-						>
-							<Button
-								variant="contained"
-								color="inherit"
-								sx={{
-									'&:hover': {
-										color: 'white',
-										backgroundColor: '#0a02a6',
-									},
-									minWidth: 90,
-									color: 'white',
-									backgroundColor: '#05014f',
-								}}
-							>
-								Sign Up
-							</Button>
-						</Link>
-					</Box>
+					{GetUserWidget()}
 				</Toolbar>
 			</Container>
 		</AppBar>
