@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./nameBox.module.css";
-import { DigitLimiter, CheckChange } from "../index.js";
+import { DigitLimiter, CheckChange, AddPlus } from "../index.js";
 
 const NameBox = (props) => {
   const [coinInfo] = useState(props.coinInfo);
@@ -26,7 +26,7 @@ const NameBox = (props) => {
               }
               style={{ textAlign: "right" }}
             >
-              $ {DigitLimiter(coinInfo.price)}
+              ${DigitLimiter(coinInfo.price)}
               <div
                 className={
                   CheckChange(coinInfo.change)
@@ -34,7 +34,7 @@ const NameBox = (props) => {
                     : styles.negativChange
                 }
               >
-                {coinInfo.change}%
+                {AddPlus(coinInfo.change)}%
               </div>
             </td>
           </tr>

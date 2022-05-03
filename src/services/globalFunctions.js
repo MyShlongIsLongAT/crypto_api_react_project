@@ -3,9 +3,6 @@ import moment from "moment";
 export let digitLimiter = (number) => {
   let limitedNumber = "";
   let numberArray = Array.from(number);
-  if (numberArray[1] === "."){
-    numberArray.unshift("0");
-  }
   for (let i = 0; i < 8; i++) {
     if(numberArray.length <= i){
       return limitedNumber;
@@ -31,4 +28,14 @@ export let checkChange = (change) =>{
       return false;
   }
   return true;
+}
+
+export let addPlus = (changeValue) =>{
+  let changeAsArray = [...changeValue];
+  let checkedValue = changeValue;
+  if(changeAsArray[0]!=='-'){
+    changeAsArray.unshift("+");
+    checkedValue = changeAsArray.join("");
+  }
+  return checkedValue;
 }
