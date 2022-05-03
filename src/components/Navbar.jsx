@@ -23,7 +23,7 @@ const pages = [
 	{ name: 'Cryptocurrencies', link: '/cryptocurrencies' },
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [{ name: 'Account', link: '/account' }];
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -116,8 +116,20 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 		}
 	};
 
-	const getUserWidget = () => {
-		const { user } = UserAuth();
+	const GetUserWidget = () => {
+		const { user, logout } = UserAuth();
+
+		console.log(user);
+
+		const handleLogout = async () => {
+			try {
+				await logout();
+
+				console.log('You are logged out');
+			} catch (e) {
+				console.log(e.message);
+			}
+		};
 
 		if (user) {
 			return (
@@ -147,10 +159,33 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 						onClose={handleCloseUserMenu}
 					>
 						{settings.map((setting) => (
-							<MenuItem key={setting} onClick={handleCloseUserMenu}>
-								<Typography textAlign="center">{setting}</Typography>
-							</MenuItem>
+							<Link
+								to={setting.link}
+								key={setting.name}
+								style={{ textDecoration: 'none' }}
+							>
+								<MenuItem
+									key={setting.name}
+									onClick={handleCloseUserMenu}
+								>
+									<Typography
+										textAlign="center"
+										sx={{ color: 'black' }}
+									>
+										{setting.name}
+									</Typography>
+								</MenuItem>
+							</Link>
 						))}
+						<MenuItem
+							key="Logout"
+							onClick={() => {
+								handleLogout();
+								handleCloseUserMenu();
+							}}
+						>
+							<Typography textAlign="center">Logout</Typography>
+						</MenuItem>
 					</Menu>
 				</Box>
 			);
@@ -282,7 +317,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 						))}
 					</Box>
 					{getSearch()}
-					{getUserWidget()}
+					{GetUserWidget()}
 				</Toolbar>
 			</Container>
 		</AppBar>
