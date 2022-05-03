@@ -26,3 +26,11 @@
 .symbolCoin {
   font-weight: bold;
 }
+
+.positivChange{
+  color:rgb(69, 233, 69);
+}
+
+.negativChange{
+  color:rgb(233, 69, 69);
+}

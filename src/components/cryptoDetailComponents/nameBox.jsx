@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./nameBox.module.css";
-import { digitLimiter } from "../../services/globalFunctions.js";
+import { DigitLimiter, CheckChange } from "../index.js";
 
 const NameBox = (props) => {
   const [coinInfo] = useState(props.coinInfo);
@@ -15,15 +15,34 @@ const NameBox = (props) => {
             </td>
             <td width="60%">
               <h1>{coinInfo.name}</h1>
-              <span>{coinInfo.symbol}</span>
+              <p>{coinInfo.symbol}</p>
             </td>
-            <td width="30%" style={{textAlign:"right"}}>{digitLimiter(coinInfo.price)}</td>
+            <td
+              width="30%"
+              className={
+                CheckChange(coinInfo.change)
+                  ? styles.positivChange
+                  : styles.negativChange
+              }
+              style={{ textAlign: "right" }}
+            >
+              $ {DigitLimiter(coinInfo.price)}
+              <div
+                className={
+                  CheckChange(coinInfo.change)
+                    ? styles.positivChange
+                    : styles.negativChange
+                }
+              >
+                {coinInfo.change}%
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
 
       <div className={styles.coinInfoBox} width="100%">
-        <h3>Über {coinInfo.symbol}:</h3>
+        <h3>Über {coinInfo.name}:</h3>
         Adipisicing id irure enim sunt labore. Aute irure deserunt adipisicing
         Lorem sunt quis aute tempor. Laborum exercitation occaecat in dolor
         consequat reprehenderit labore velit. Sunt in mollit velit occaecat et

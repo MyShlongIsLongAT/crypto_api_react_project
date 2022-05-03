@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./coinChart.module.css";
+import { TimeOneDay } from "../index.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,15 +27,24 @@ const CoinChart = (props) => {
   const [coinStats] = useState(props.coinStats);
 
   const options = {
-    responsive:true,
+    responsive: true,
     plugins: {
       legend: {
-        display:false,
+        display: false,
       },
       title: {
         display: true,
         text: "Price of " + coinStats.name,
       },
+    },
+    elements: {
+      line: {
+        borderColor: coinStats.color,
+        borderWidth: 2
+      },
+      point: {
+        radius: 0
+      }
     },
     scales: {
       x: {
@@ -54,34 +64,7 @@ const CoinChart = (props) => {
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-  ];
+  const labels = TimeOneDay(coinStats.sparkline.length);
 
   const data = {
     labels,
