@@ -32,7 +32,7 @@ export default function SignIn() {
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
-			console.log(e.message);
+			console.log(error);
 		}
 	};
 

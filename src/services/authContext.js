@@ -13,14 +13,17 @@ export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState();
 
 	const createUser = (email, password) => {
+		sessionStorage.setItem('loggedIn', 'yes');
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
 	const signIn = (email, password) => {
+		sessionStorage.setItem('loggedIn', 'yes');
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
 	const logout = () => {
+		sessionStorage.removeItem('loggedIn');
 		return signOut(auth);
 	};
 

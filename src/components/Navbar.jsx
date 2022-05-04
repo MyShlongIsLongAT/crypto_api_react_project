@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -75,6 +75,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const ResponsiveAppBar = ({ searchHandler }) => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const navigate = useNavigate();
 	const location = useLocation();
 
 	const handleOpenNavMenu = (event) => {
@@ -117,23 +118,21 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 	};
 
 	const GetUserWidget = () => {
-		const { user, logout } = UserAuth();
-
-		console.log(user);
+		const { logout } = UserAuth();
 
 		const handleLogout = async () => {
 			try {
 				await logout();
-
+				if (location.pathname === '/account') {
+					navigate('/');
+				}
 				console.log('You are logged out');
 			} catch (e) {
 				console.log(e.message);
 			}
 		};
 
-		if (user === undefined) {
-			return <></>;
-		} else if (user) {
+		if (sessionStorage.getItem('loggedIn')) {
 			return (
 				<Box sx={{ flexGrow: 0 }}>
 					<Tooltip title="Open settings">
@@ -191,46 +190,45 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 					</Menu>
 				</Box>
 			);
-		} else {
-			return (
-				<Box sx={{ flexGrow: 0 }}>
-					<Link
-						to="/signin"
-						key={uuidv4()}
-						style={{ textDecoration: 'none' }}
-					>
-						<Button
-							variant="outlined"
-							color="inherit"
-							sx={{ mr: 2, minWidth: 90, color: 'white' }}
-						>
-							Sign In
-						</Button>
-					</Link>
-					<Link
-						to="/signup"
-						key={uuidv4()}
-						style={{ textDecoration: 'none' }}
-					>
-						<Button
-							variant="contained"
-							color="inherit"
-							sx={{
-								'&:hover': {
-									color: 'white',
-									backgroundColor: '#0a02a6',
-								},
-								minWidth: 90,
-								color: 'white',
-								backgroundColor: '#05014f',
-							}}
-						>
-							Sign Up
-						</Button>
-					</Link>
-				</Box>
-			);
 		}
+		return (
+			<Box sx={{ flexGrow: 0 }}>
+				<Link
+					to="/signin"
+					key={uuidv4()}
+					style={{ textDecoration: 'none' }}
+				>
+					<Button
+						variant="outlined"
+						color="inherit"
+						sx={{ mr: 2, minWidth: 90, color: 'white' }}
+					>
+						Sign In
+					</Button>
+				</Link>
+				<Link
+					to="/signup"
+					key={uuidv4()}
+					style={{ textDecoration: 'none' }}
+				>
+					<Button
+						variant="contained"
+						color="inherit"
+						sx={{
+							'&:hover': {
+								color: 'white',
+								backgroundColor: '#0a02a6',
+							},
+							minWidth: 90,
+							color: 'white',
+							backgroundColor: '#05014f',
+						}}
+					>
+						Sign Up
+					</Button>
+				</Link>
+			</Box>
+		);
 	};
 	return (
 		<AppBar position="static">
