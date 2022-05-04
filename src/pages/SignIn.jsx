@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,12 +15,15 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
+import { Alert } from '@mui/material';
 
 const theme = createTheme();
 
 export default function SignIn() {
 	const [error, setError] = useState('');
-	const { signIn } = UserAuth();
+	const [loading, setLoading] = useState(false);
+	const { signIn, googleSignIn, user } = UserAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
@@ -28,13 +31,33 @@ export default function SignIn() {
 		setError('');
 		const data = new FormData(event.currentTarget);
 		try {
+			setLoading(true);
 			await signIn(data.get('email'), data.get('password'));
-			navigate('/account');
+			sessionStorage.setItem('loggedIn', 'yes');
 		} catch (e) {
 			setError(e.message);
-			console.log(e.message);
+			console.log(error);
 		}
+		setLoading(false);
 	};
+
+	const handleGoogleSignIn = async () => {
+		try {
+			setLoading(true);
+			await googleSignIn();
+		} catch (e) {
+			setError(e.message);
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
+	useEffect(() => {
+		if (user) {
+			sessionStorage.setItem('loggedIn', 'yes');
+			navigate('/account');
+		}
+	}, [user]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -60,6 +83,7 @@ export default function SignIn() {
 						noValidate
 						sx={{ mt: 1 }}
 					>
+						{error && <Alert severity="error">{error}</Alert>}
 						<TextField
 							margin="normal"
 							required
@@ -80,11 +104,12 @@ export default function SignIn() {
 							id="password"
 							autoComplete="current-password"
 						/>
-						<FormControlLabel
+						{/* <FormControlLabel
 							control={<Checkbox value="remember" color="primary" />}
 							label="Remember me"
-						/>
+						/> */}
 						<Button
+							disabled={loading}
 							type="submit"
 							fullWidth
 							variant="contained"
@@ -92,18 +117,25 @@ export default function SignIn() {
 						>
 							Sign In
 						</Button>
-						<Grid container>
+						<Grid container justifyContent="flex-end">
 							<Grid item xs>
-								<Link href="#" variant="body2">
+								<Link href="/forgot-password" variant="body2">
 									Forgot password?
 								</Link>
 							</Grid>
 							<Grid item>
-								<Link href="#" variant="body2">
-									{"Don't have an account? Sign Up"}
+								Don't have an account yet?{' '}
+								<Link href="/signup" variant="body2">
+									Sign Up
 								</Link>
 							</Grid>
 						</Grid>
+					</Box>
+					<Box sx={{ marginTop: 3 }}>
+						<GoogleButton
+							disabled={loading}
+							onClick={handleGoogleSignIn}
+						/>
 					</Box>
 				</Box>
 			</Container>

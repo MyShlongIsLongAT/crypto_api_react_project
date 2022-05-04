@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -13,27 +14,51 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
+import GoogleButton from 'react-google-button';
+import { Alert } from '@mui/material';
 
 const theme = createTheme();
 
 export default function SignUp() {
 	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
-	const { createUser } = UserAuth();
+	const { createUser, googleSignIn, user } = UserAuth();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		setError('');
 		try {
+			setLoading(true);
 			await createUser(data.get('email'), data.get('password'));
+			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
-			console.log(e.message);
+			console.log(error);
 		}
+		setLoading(false);
 	};
+
+	const handleGoogleSignIn = async () => {
+		try {
+			setLoading(true);
+			await googleSignIn();
+		} catch (e) {
+			setError(e.message);
+			console.log(error);
+		}
+		setLoading(false);
+	};
+
+	useEffect(() => {
+		if (user) {
+			sessionStorage.setItem('loggedIn', 'yes');
+			navigate('/account');
+		}
+	}, [user]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -59,7 +84,8 @@ export default function SignUp() {
 						onSubmit={handleSubmit}
 						sx={{ mt: 3 }}
 					>
-						<Grid container spacing={2}>
+						{error && <Alert severity="error">{error}</Alert>}
+						<Grid container spacing={2} marginTop={'3px'}>
 							<Grid item xs={12}>
 								<TextField
 									required
@@ -84,6 +110,7 @@ export default function SignUp() {
 						</Grid>
 
 						<Button
+							disabled={loading}
 							type="submit"
 							fullWidth
 							variant="contained"
@@ -92,7 +119,7 @@ export default function SignUp() {
 							Sign Up
 						</Button>
 
-						<Grid container justifyContent="flex-end">
+						<Grid container justifyContent="center">
 							<Grid item>
 								Already have an account?{' '}
 								<Link href="/signin" variant="body2">
@@ -100,6 +127,12 @@ export default function SignUp() {
 								</Link>
 							</Grid>
 						</Grid>
+					</Box>
+					<Box sx={{ marginTop: 3 }}>
+						<GoogleButton
+							disabled={loading}
+							onClick={handleGoogleSignIn}
+						/>
 					</Box>
 				</Box>
 			</Container>
