@@ -30,6 +30,7 @@ export default function SignIn() {
 		const data = new FormData(event.currentTarget);
 		try {
 			await signIn(data.get('email'), data.get('password'));
+			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
@@ -40,6 +41,7 @@ export default function SignIn() {
 	const handleGoogleSignIn = async () => {
 		try {
 			await googleSignIn();
+			sessionStorage.setItem('loggedIn', 'yes');
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -119,6 +121,8 @@ export default function SignIn() {
 								</Link>
 							</Grid>
 						</Grid>
+					</Box>
+					<Box sx={{ marginTop: 3 }}>
 						<GoogleButton onClick={handleGoogleSignIn} />
 					</Box>
 				</Box>

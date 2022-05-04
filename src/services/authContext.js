@@ -17,20 +17,17 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Create Account With Email&Password
 	const createUser = (email, password) => {
-		sessionStorage.setItem('loggedIn', 'yes');
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
 	//Login With Email&Password
 	const signIn = (email, password) => {
-		sessionStorage.setItem('loggedIn', 'yes');
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
 	//Google Login
 	const googleSignIn = () => {
 		const provider = new GoogleAuthProvider();
-		sessionStorage.setItem('loggedIn', 'yes');
 		signInWithPopup(auth, provider);
 		//signInWithRedirect(auth, provider);
 	};

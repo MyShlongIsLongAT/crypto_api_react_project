@@ -29,6 +29,7 @@ export default function SignUp() {
 		setError('');
 		try {
 			await createUser(data.get('email'), data.get('password'));
+			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
@@ -44,13 +45,18 @@ export default function SignUp() {
 		}
 	};
 
+	React.useEffect(() => {
+		if (sessionStorage.getItem('loggedIn') !== null) {
+			navigate('/account');
+		}
+	}, [sessionStorage.getItem('loggedIn')]);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
 				<Box
 					sx={{
-						marginTop: 8,
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
@@ -109,6 +115,8 @@ export default function SignUp() {
 								</Link>
 							</Grid>
 						</Grid>
+					</Box>
+					<Box sx={{ marginTop: 3 }}>
 						<GoogleButton onClick={handleGoogleSignIn} />
 					</Box>
 				</Box>
