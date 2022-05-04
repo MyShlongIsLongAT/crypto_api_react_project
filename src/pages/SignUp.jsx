@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
+import GoogleButton from 'react-google-button';
 
 const theme = createTheme();
 
@@ -20,7 +21,7 @@ export default function SignUp() {
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
-	const { createUser } = UserAuth();
+	const { createUser, googleSignIn } = UserAuth();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -31,7 +32,15 @@ export default function SignUp() {
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
-			console.log(e.message);
+			console.log(error);
+		}
+	};
+
+	const handleGoogleSignIn = async () => {
+		try {
+			await googleSignIn();
+		} catch (error) {
+			console.log(error.message);
 		}
 	};
 
@@ -100,6 +109,7 @@ export default function SignUp() {
 								</Link>
 							</Grid>
 						</Grid>
+						<GoogleButton onClick={handleGoogleSignIn} />
 					</Box>
 				</Box>
 			</Container>

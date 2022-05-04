@@ -15,12 +15,13 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button';
 
 const theme = createTheme();
 
 export default function SignIn() {
 	const [error, setError] = useState('');
-	const { signIn } = UserAuth();
+	const { signIn, googleSignIn } = UserAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
@@ -35,6 +36,20 @@ export default function SignIn() {
 			console.log(error);
 		}
 	};
+
+	const handleGoogleSignIn = async () => {
+		try {
+			await googleSignIn();
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
+	React.useEffect(() => {
+		if (sessionStorage.getItem('loggedIn') !== null) {
+			navigate('/account');
+		}
+	}, [sessionStorage.getItem('loggedIn')]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -104,6 +119,7 @@ export default function SignIn() {
 								</Link>
 							</Grid>
 						</Grid>
+						<GoogleButton onClick={handleGoogleSignIn} />
 					</Box>
 				</Box>
 			</Container>

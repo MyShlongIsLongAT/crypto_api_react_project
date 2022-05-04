@@ -126,7 +126,6 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 				if (location.pathname === '/account') {
 					navigate('/');
 				}
-				console.log('You are logged out');
 			} catch (e) {
 				console.log(e.message);
 			}
