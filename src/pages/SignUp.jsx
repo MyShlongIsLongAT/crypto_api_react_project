@@ -15,11 +15,13 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import GoogleButton from 'react-google-button';
+import { Alert } from '@mui/material';
 
 const theme = createTheme();
 
 export default function SignUp() {
 	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
 	const { createUser, googleSignIn, user } = UserAuth();
@@ -29,6 +31,7 @@ export default function SignUp() {
 		const data = new FormData(event.currentTarget);
 		setError('');
 		try {
+			setLoading(true);
 			await createUser(data.get('email'), data.get('password'));
 			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
@@ -36,14 +39,18 @@ export default function SignUp() {
 			setError(e.message);
 			console.log(error);
 		}
+		setLoading(false);
 	};
 
 	const handleGoogleSignIn = async () => {
 		try {
+			setLoading(true);
 			await googleSignIn();
-		} catch (error) {
-			console.log(error.message);
+		} catch (e) {
+			setError(e.message);
+			console.log(error);
 		}
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -59,6 +66,7 @@ export default function SignUp() {
 				<CssBaseline />
 				<Box
 					sx={{
+						marginTop: 8,
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
@@ -76,7 +84,8 @@ export default function SignUp() {
 						onSubmit={handleSubmit}
 						sx={{ mt: 3 }}
 					>
-						<Grid container spacing={2}>
+						{error && <Alert severity="error">{error}</Alert>}
+						<Grid container spacing={2} marginTop={'3px'}>
 							<Grid item xs={12}>
 								<TextField
 									required
@@ -101,6 +110,7 @@ export default function SignUp() {
 						</Grid>
 
 						<Button
+							disabled={loading}
 							type="submit"
 							fullWidth
 							variant="contained"
@@ -109,7 +119,7 @@ export default function SignUp() {
 							Sign Up
 						</Button>
 
-						<Grid container justifyContent="flex-end">
+						<Grid container justifyContent="center">
 							<Grid item>
 								Already have an account?{' '}
 								<Link href="/signin" variant="body2">
@@ -119,7 +129,10 @@ export default function SignUp() {
 						</Grid>
 					</Box>
 					<Box sx={{ marginTop: 3 }}>
-						<GoogleButton onClick={handleGoogleSignIn} />
+						<GoogleButton
+							disabled={loading}
+							onClick={handleGoogleSignIn}
+						/>
 					</Box>
 				</Box>
 			</Container>

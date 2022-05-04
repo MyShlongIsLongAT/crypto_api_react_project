@@ -16,11 +16,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import { useNavigate } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
+import { Alert } from '@mui/material';
 
 const theme = createTheme();
 
 export default function SignIn() {
 	const [error, setError] = useState('');
+	const [loading, setLoading] = useState(false);
 	const { signIn, googleSignIn, user } = UserAuth();
 	const navigate = useNavigate();
 
@@ -29,20 +31,25 @@ export default function SignIn() {
 		setError('');
 		const data = new FormData(event.currentTarget);
 		try {
+			setLoading(true);
 			await signIn(data.get('email'), data.get('password'));
 			sessionStorage.setItem('loggedIn', 'yes');
 		} catch (e) {
 			setError(e.message);
 			console.log(error);
 		}
+		setLoading(false);
 	};
 
 	const handleGoogleSignIn = async () => {
 		try {
+			setLoading(true);
 			await googleSignIn();
-		} catch (error) {
-			console.log(error.message);
+		} catch (e) {
+			setError(e.message);
+			console.log(error);
 		}
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -76,6 +83,7 @@ export default function SignIn() {
 						noValidate
 						sx={{ mt: 1 }}
 					>
+						{error && <Alert severity="error">{error}</Alert>}
 						<TextField
 							margin="normal"
 							required
@@ -96,11 +104,12 @@ export default function SignIn() {
 							id="password"
 							autoComplete="current-password"
 						/>
-						<FormControlLabel
+						{/* <FormControlLabel
 							control={<Checkbox value="remember" color="primary" />}
 							label="Remember me"
-						/>
+						/> */}
 						<Button
+							disabled={loading}
 							type="submit"
 							fullWidth
 							variant="contained"
@@ -108,9 +117,9 @@ export default function SignIn() {
 						>
 							Sign In
 						</Button>
-						<Grid container>
+						<Grid container justifyContent="flex-end">
 							<Grid item xs>
-								<Link href="#" variant="body2">
+								<Link href="/forgot-password" variant="body2">
 									Forgot password?
 								</Link>
 							</Grid>
@@ -123,7 +132,10 @@ export default function SignIn() {
 						</Grid>
 					</Box>
 					<Box sx={{ marginTop: 3 }}>
-						<GoogleButton onClick={handleGoogleSignIn} />
+						<GoogleButton
+							disabled={loading}
+							onClick={handleGoogleSignIn}
+						/>
 					</Box>
 				</Box>
 			</Container>
