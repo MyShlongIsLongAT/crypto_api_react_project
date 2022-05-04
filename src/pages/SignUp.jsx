@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -21,7 +22,7 @@ export default function SignUp() {
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
-	const { createUser, googleSignIn } = UserAuth();
+	const { createUser, googleSignIn, user } = UserAuth();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -45,11 +46,12 @@ export default function SignUp() {
 		}
 	};
 
-	React.useEffect(() => {
-		if (sessionStorage.getItem('loggedIn') !== null) {
+	useEffect(() => {
+		if (user) {
+			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		}
-	}, [sessionStorage.getItem('loggedIn')]);
+	}, [user]);
 
 	return (
 		<ThemeProvider theme={theme}>

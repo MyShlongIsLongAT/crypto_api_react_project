@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,7 +21,7 @@ const theme = createTheme();
 
 export default function SignIn() {
 	const [error, setError] = useState('');
-	const { signIn, googleSignIn } = UserAuth();
+	const { signIn, googleSignIn, user } = UserAuth();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
@@ -31,7 +31,6 @@ export default function SignIn() {
 		try {
 			await signIn(data.get('email'), data.get('password'));
 			sessionStorage.setItem('loggedIn', 'yes');
-			navigate('/account');
 		} catch (e) {
 			setError(e.message);
 			console.log(error);
@@ -41,17 +40,17 @@ export default function SignIn() {
 	const handleGoogleSignIn = async () => {
 		try {
 			await googleSignIn();
-			sessionStorage.setItem('loggedIn', 'yes');
 		} catch (error) {
 			console.log(error.message);
 		}
 	};
 
-	React.useEffect(() => {
-		if (sessionStorage.getItem('loggedIn') !== null) {
+	useEffect(() => {
+		if (user) {
+			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		}
-	}, [sessionStorage.getItem('loggedIn')]);
+	}, [user]);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -116,8 +115,9 @@ export default function SignIn() {
 								</Link>
 							</Grid>
 							<Grid item>
-								<Link href="#" variant="body2">
-									{"Don't have an account? Sign Up"}
+								Don't have an account yet?{' '}
+								<Link href="/signup" variant="body2">
+									Sign Up
 								</Link>
 							</Grid>
 						</Grid>

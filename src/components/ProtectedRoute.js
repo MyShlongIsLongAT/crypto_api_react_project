@@ -1,8 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { UserAuth } from '../services/authContext';
 
 const ProtectedRoute = ({ children }) => {
-	return sessionStorage.getItem('loggedIn') ? children : <Navigate to="/" />;
+	const { user } = UserAuth();
+
+	return user ? children : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;
