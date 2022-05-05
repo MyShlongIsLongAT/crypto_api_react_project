@@ -8,6 +8,7 @@ import {
 	signInWithPopup,
 	signInWithRedirect,
 	sendPasswordResetEmail,
+	updateEmail,
 } from 'firebase/auth';
 import { auth } from './firebase';
 
@@ -33,6 +34,11 @@ export const AuthContextProvider = ({ children }) => {
 		//signInWithRedirect(auth, provider);
 	};
 
+	//Upadte Email
+	const changeEmail = (email) => {
+		return updateEmail(auth, email);
+	};
+
 	//Reset Password
 	const resetPassword = (email) => {
 		return sendPasswordResetEmail(auth, email);
@@ -40,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Logout
 	const logout = () => {
-		sessionStorage.removeItem('loggedIn');
+		sessionStorage.clear();
 		return signOut(auth);
 	};
 
@@ -60,6 +66,7 @@ export const AuthContextProvider = ({ children }) => {
 				signIn,
 				googleSignIn,
 				resetPassword,
+				changeEmail,
 			}}
 		>
 			{children}

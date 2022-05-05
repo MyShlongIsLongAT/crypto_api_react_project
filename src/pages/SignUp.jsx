@@ -12,12 +12,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import GoogleButton from 'react-google-button';
 import { Alert } from '@mui/material';
-
-const theme = createTheme();
 
 export default function SignUp() {
 	const [error, setError] = useState('');
@@ -61,81 +58,76 @@ export default function SignUp() {
 	}, [user]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Container component="main" maxWidth="xs">
-				<CssBaseline />
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<Box
+				sx={{
+					marginTop: 8,
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+				}}
+			>
+				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Sign Up
+				</Typography>
 				<Box
-					sx={{
-						marginTop: 8,
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-					}}
+					component="form"
+					noValidate
+					onSubmit={handleSubmit}
+					sx={{ mt: 3 }}
 				>
-					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Sign Up
-					</Typography>
-					<Box
-						component="form"
-						noValidate
-						onSubmit={handleSubmit}
-						sx={{ mt: 3 }}
+					{error && <Alert severity="error">{error}</Alert>}
+					<Grid container spacing={2} marginTop={'3px'}>
+						<Grid item xs={12}>
+							<TextField
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								autoComplete="new-password"
+							/>
+						</Grid>
+					</Grid>
+
+					<Button
+						disabled={loading}
+						type="submit"
+						fullWidth
+						variant="contained"
+						sx={{ mt: 3, mb: 2 }}
 					>
-						{error && <Alert severity="error">{error}</Alert>}
-						<Grid container spacing={2} marginTop={'3px'}>
-							<Grid item xs={12}>
-								<TextField
-									required
-									fullWidth
-									id="email"
-									label="Email Address"
-									name="email"
-									autoComplete="email"
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									required
-									fullWidth
-									name="password"
-									label="Password"
-									type="password"
-									id="password"
-									autoComplete="new-password"
-								/>
-							</Grid>
-						</Grid>
+						Sign Up
+					</Button>
 
-						<Button
-							disabled={loading}
-							type="submit"
-							fullWidth
-							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
-						>
-							Sign Up
-						</Button>
-
-						<Grid container justifyContent="center">
-							<Grid item>
-								Already have an account?{' '}
-								<Link href="/signin" variant="body2">
-									Sign in
-								</Link>
-							</Grid>
+					<Grid container justifyContent="center">
+						<Grid item>
+							Already have an account?{' '}
+							<Link href="/signin" variant="body2">
+								Sign in
+							</Link>
 						</Grid>
-					</Box>
-					<Box sx={{ marginTop: 3 }}>
-						<GoogleButton
-							disabled={loading}
-							onClick={handleGoogleSignIn}
-						/>
-					</Box>
+					</Grid>
 				</Box>
-			</Container>
-		</ThemeProvider>
+				<Box sx={{ marginTop: 3 }}>
+					<GoogleButton disabled={loading} onClick={handleGoogleSignIn} />
+				</Box>
+			</Box>
+		</Container>
 	);
 }
