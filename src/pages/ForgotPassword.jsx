@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
 import { Alert } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 const theme = createTheme();
 
@@ -74,15 +75,21 @@ export default function ForgotPassword() {
 		} else {
 			return (
 				<>
-					<Button
-						disabled={loading}
-						type="submit"
-						fullWidth
-						variant="contained"
-						sx={{ mt: 3, mb: 2 }}
+					<Link
+						href="/signin"
+						style={{ textDecoration: 'none' }}
+						key={uuidv4()}
+						variant="body2"
 					>
-						Login
-					</Button>
+						<Button
+							disabled={loading}
+							fullWidth
+							variant="contained"
+							sx={{ mt: 3, mb: 2, color: 'white' }}
+						>
+							Go to Sign In
+						</Button>
+					</Link>
 				</>
 			);
 		}

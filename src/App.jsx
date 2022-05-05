@@ -21,6 +21,8 @@ const App = () => {
 		setSearchTerm(search);
 	};
 
+	//TODO User gets not logged out when closing tab
+
 	return (
 		<AuthContextProvider>
 			<div className="app">
