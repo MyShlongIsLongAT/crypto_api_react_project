@@ -118,8 +118,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 	};
 
 	const GetUserWidget = () => {
-		const { logout } = UserAuth();
-
+		const { user,logout } = UserAuth();
 		const handleLogout = async () => {
 			try {
 				await logout();
@@ -138,7 +137,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 						<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 							<Avatar
 								alt="Remy Sharp"
-								src="/static/images/avatar/2.jpg"
+								src={user.photoURL}
 							/>
 						</IconButton>
 					</Tooltip>
