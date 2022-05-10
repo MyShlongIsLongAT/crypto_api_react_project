@@ -1,5 +1,4 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -120,14 +119,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 
   const GetUserWidget = () => {
     const { user, logout } = UserAuth();
-	const [photoURL, setPhotoURL] = useState(
-		"/static/images/avatar/1.jpg"
-	);
-	useEffect(() => {
-		if (user?.photoURL) {
-		  setPhotoURL(user.photoURL);
-		}
-	  }, [user]);
+
     const handleLogout = async () => {
       try {
         await logout();
@@ -144,7 +136,12 @@ const ResponsiveAppBar = ({ searchHandler }) => {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={photoURL} />
+              <Avatar
+                alt="Remy Sharp"
+                src={
+                  user?.photoURL ? user.photoURL : "/static/images/avatar/1.jpg"
+                }
+              />
             </IconButton>
           </Tooltip>
           <Menu
