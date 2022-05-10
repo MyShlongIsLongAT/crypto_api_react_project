@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -10,12 +9,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { UserAuth } from '../services/authContext';
-import { Alert } from '@mui/material';
+import { Alert, CssBaseline } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-
-const theme = createTheme();
 
 export default function ForgotPassword() {
 	const [error, setError] = useState('');
@@ -96,35 +92,33 @@ export default function ForgotPassword() {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Container component="main" maxWidth="xs">
-				<CssBaseline />
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+			<Box
+				sx={{
+					marginTop: 8,
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+				}}
+			>
+				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Reset Password
+				</Typography>
 				<Box
-					sx={{
-						marginTop: 8,
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-					}}
+					component="form"
+					onSubmit={handleSubmit}
+					noValidate
+					sx={{ mt: 1 }}
 				>
-					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-						<LockOutlinedIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Reset Password
-					</Typography>
-					<Box
-						component="form"
-						onSubmit={handleSubmit}
-						noValidate
-						sx={{ mt: 1 }}
-					>
-						{error && <Alert severity="error">{error}</Alert>}
-						{message && <Alert severity="info">{message}</Alert>}
-						{checkIfEmailSent()}
-					</Box>
+					{error && <Alert severity="error">{error}</Alert>}
+					{message && <Alert severity="info">{message}</Alert>}
+					{checkIfEmailSent()}
 				</Box>
-			</Container>
-		</ThemeProvider>
+			</Box>
+		</Container>
 	);
 }
