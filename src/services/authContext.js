@@ -10,6 +10,7 @@ import {
 	sendPasswordResetEmail,
 	updateEmail,
 } from 'firebase/auth';
+
 import { auth } from './firebase';
 
 const UserContext = createContext();

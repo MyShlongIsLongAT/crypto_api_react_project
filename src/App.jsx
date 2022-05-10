@@ -13,6 +13,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
 import { CoinProvider } from './services/coinContext';
 import { AuthContextProvider } from './services/authContext';
+import { StorageContextProvider } from "./services/storageContext";
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 const light = {
@@ -28,7 +29,7 @@ const dark = {
 };
 
 const App = () => {
-	const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
 	const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -48,6 +49,7 @@ const App = () => {
 		>
 			<CssBaseline />
 			<AuthContextProvider>
+			<StorageContextProvider>
 				<div className="app">
 					<div className="navbar">
 						<Navbar searchHandler={searchHandler} />
@@ -89,6 +91,7 @@ const App = () => {
 						</CoinProvider>
 					</div>
 				</div>
+				</StorageContextProvider>
 			</AuthContextProvider>
 		</ThemeProvider>
 	);
