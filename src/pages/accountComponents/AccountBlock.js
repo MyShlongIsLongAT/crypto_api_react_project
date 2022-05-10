@@ -18,7 +18,7 @@ const AccountBlock = () => {
 
   const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = useState(
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+    "/static/images/avatar/1.jpg"
   );
 
   const navigate = useNavigate();
