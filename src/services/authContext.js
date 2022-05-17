@@ -22,11 +22,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Create Account With Email&Password
 	const createUser = (email, password, username) => {
-		return createUserWithEmailAndPassword(auth, email, password).then(() => {
-			updateProfile(auth.currentUser, {
-				displayName: username,
-			});
-		});
+		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
 	//Login With Email&Password
