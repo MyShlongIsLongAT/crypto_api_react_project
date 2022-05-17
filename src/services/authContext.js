@@ -9,6 +9,8 @@ import {
 	signInWithRedirect,
 	sendPasswordResetEmail,
 	updateEmail,
+	deleteUser,
+	updateProfile,
 } from 'firebase/auth';
 
 import { auth } from './firebase';
@@ -19,8 +21,8 @@ export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState();
 
 	//Create Account With Email&Password
-	const createUser = (email, password) => {
-		return createUserWithEmailAndPassword(auth, email, password);
+	const createUser = (email, password, username) => {
+		return createUserWithEmailAndPassword(auth, email, password, username);
 	};
 
 	//Login With Email&Password
@@ -40,6 +42,11 @@ export const AuthContextProvider = ({ children }) => {
 		return updateEmail(auth, email);
 	};
 
+	//Upadte User
+	const changeUser = (username) => {
+		return updateProfile(auth, username);
+	};
+
 	//Reset Password
 	const resetPassword = (email) => {
 		return sendPasswordResetEmail(auth, email);
@@ -49,6 +56,11 @@ export const AuthContextProvider = ({ children }) => {
 	const logout = () => {
 		sessionStorage.clear();
 		return signOut(auth);
+	};
+
+	//Delete user
+	const removeUser = () => {
+		return deleteUser(user);
 	};
 
 	useEffect(() => {
@@ -68,6 +80,8 @@ export const AuthContextProvider = ({ children }) => {
 				googleSignIn,
 				resetPassword,
 				changeEmail,
+				removeUser,
+				changeUser,
 			}}
 		>
 			{children}

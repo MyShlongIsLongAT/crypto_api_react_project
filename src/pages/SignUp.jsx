@@ -29,7 +29,11 @@ export default function SignUp() {
 		setError('');
 		try {
 			setLoading(true);
-			await createUser(data.get('email'), data.get('password'));
+			await createUser(
+				data.get('email'),
+				data.get('password'),
+				data.get('username')
+			);
 			sessionStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		} catch (e) {
@@ -74,14 +78,18 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Sign Up
 				</Typography>
-				<Box
-					component="form"
-					noValidate
-					onSubmit={handleSubmit}
-					sx={{ mt: 3 }}
-				>
+				<Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
 					{error && <Alert severity="error">{error}</Alert>}
 					<Grid container spacing={2} marginTop={'3px'}>
+						<Grid item xs={12}>
+							<TextField
+								required
+								fullWidth
+								id="username"
+								label="Username"
+								name="username"
+							/>
+						</Grid>
 						<Grid item xs={12}>
 							<TextField
 								required
