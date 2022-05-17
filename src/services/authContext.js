@@ -22,7 +22,11 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Create Account With Email&Password
 	const createUser = (email, password, username) => {
-		return createUserWithEmailAndPassword(auth, email, password, username);
+		return createUserWithEmailAndPassword(auth, email, password).then(() => {
+			updateProfile(auth.currentUser, {
+				displayName: username,
+			});
+		});
 	};
 
 	//Login With Email&Password
@@ -64,6 +68,7 @@ export const AuthContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
+		console.log('useEffect');
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser);
 		});

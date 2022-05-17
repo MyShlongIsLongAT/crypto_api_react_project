@@ -120,8 +120,6 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 	const GetUserWidget = () => {
 		const { user, logout } = UserAuth();
 
-		console.log(user);
-
 		const handleLogout = async () => {
 			try {
 				await logout();
