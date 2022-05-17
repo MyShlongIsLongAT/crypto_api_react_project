@@ -34,7 +34,7 @@ export default function SignUp() {
 				data.get('password'),
 				data.get('username')
 			);
-			sessionStorage.setItem('loggedIn', 'yes');
+			localStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		} catch (e) {
 			setError(e.message);
@@ -56,7 +56,7 @@ export default function SignUp() {
 
 	useEffect(() => {
 		if (user) {
-			sessionStorage.setItem('loggedIn', 'yes');
+			localStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		}
 	}, [user]);

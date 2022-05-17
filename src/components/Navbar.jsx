@@ -131,7 +131,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 			}
 		};
 
-		if (sessionStorage.getItem('loggedIn')) {
+		if (localStorage.getItem('loggedIn')) {
 			return (
 				<Box sx={{ flexGrow: 0 }}>
 					<Tooltip title="Open settings">

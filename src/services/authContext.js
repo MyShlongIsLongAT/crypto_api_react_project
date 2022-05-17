@@ -54,7 +54,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Logout
 	const logout = () => {
-		sessionStorage.clear();
+		localStorage.removeItem('loggedIn');
 		return signOut(auth);
 	};
 
@@ -64,7 +64,6 @@ export const AuthContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		console.log('useEffect');
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser);
 		});
