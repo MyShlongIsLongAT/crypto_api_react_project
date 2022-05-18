@@ -6,7 +6,7 @@ import {
 	onAuthStateChanged,
 	GoogleAuthProvider,
 	signInWithPopup,
-	signInWithRedirect,
+	//signInWithRedirect,
 	sendPasswordResetEmail,
 	updateEmail,
 	deleteUser,
@@ -20,9 +20,15 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState();
 
-	//Create Account With Email&Password
+	//Create Account With Email & Password & Username
 	const createUser = (email, password, username) => {
-		return createUserWithEmailAndPassword(auth, email, password);
+		return createUserWithEmailAndPassword(auth, email, password).then(
+			async () => {
+				await updateProfile(auth.currentUser, {
+					displayName: username,
+				});
+			}
+		);
 	};
 
 	//Login With Email&Password
