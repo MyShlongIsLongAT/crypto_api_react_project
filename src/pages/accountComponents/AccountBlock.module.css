@@ -1,19 +1,63 @@
-.uploadButton{
-    margin-top:10px;
+.AccountPage {
+   text-align: center;
 }
 
-.AccountPage{
-    text-align:center;
+.PictureBlockWrapper {
+   display: flex;
+   justify-content: center;
 }
 
-.profilePicture{
-    margin-left: auto;
-    margin-right: auto;
+.PictureBlock {
+   margin-top: 20px;
+   width: 405px;
+   height: 335px;
+
+   padding: 10px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   border-radius: 10px;
+   -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
+   -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
+   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
 }
 
-.profileTable{
-    text-align:start;
-    margin-left: auto;
-    margin-right: auto;
+.uploadButton {
+   margin-top: 10px;
 }
 
+.AccountInfoWrapper{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.AccountInfo {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   margin-top: 20px;
+
+   width: 843px;
+   height: 182px;
+
+   border-radius: 10px;
+   -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
+   -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
+   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.19);
+}
+
+.profileTable {
+   text-align: start;
+}
+
+.logoutButton{
+   margin-top:20px;
+}
+
+.deleteButton{
+   margin-top:10px;
+}
