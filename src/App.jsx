@@ -41,8 +41,6 @@ const App = () => {
 		setSearchTerm(search);
 	};
 
-	//TODO User gets not logged out when closing tab
-
 	return (
 		<ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
 			<CssBaseline />

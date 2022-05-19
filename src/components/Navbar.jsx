@@ -120,8 +120,6 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 	const GetUserWidget = () => {
 		const { user, logout } = UserAuth();
 
-		console.log(user);
-
 		const handleLogout = async () => {
 			try {
 				await logout();
@@ -133,7 +131,7 @@ const ResponsiveAppBar = ({ searchHandler }) => {
 			}
 		};
 
-		if (sessionStorage.getItem('loggedIn')) {
+		if (localStorage.getItem('loggedIn')) {
 			return (
 				<Box sx={{ flexGrow: 0 }}>
 					<Tooltip title="Open settings">
