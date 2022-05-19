@@ -30,7 +30,6 @@ export default function SignIn() {
 		try {
 			setLoading(true);
 			await signIn(data.get('email'), data.get('password'));
-			sessionStorage.setItem('loggedIn', 'yes');
 		} catch (e) {
 			setError(e.message);
 			console.log(error);
@@ -51,7 +50,7 @@ export default function SignIn() {
 
 	useEffect(() => {
 		if (user) {
-			sessionStorage.setItem('loggedIn', 'yes');
+			localStorage.setItem('loggedIn', 'yes');
 			navigate('/account');
 		}
 	}, [user]);
@@ -73,12 +72,7 @@ export default function SignIn() {
 				<Typography component="h1" variant="h5">
 					Sign in
 				</Typography>
-				<Box
-					component="form"
-					onSubmit={handleSubmit}
-					noValidate
-					sx={{ mt: 1 }}
-				>
+				<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 					{error && <Alert severity="error">{error}</Alert>}
 					<TextField
 						margin="normal"
