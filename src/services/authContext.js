@@ -43,13 +43,13 @@ export const AuthContextProvider = ({ children }) => {
 		//signInWithRedirect(auth, provider);
 	};
 
-	//Upadte Email
+	//Update Email
 	const changeEmail = (email) => {
 		return updateEmail(auth, email);
 	};
 
-	//Upadte User
-	const changeUser = (username) => {
+	//Update Username
+	const changeUsername = (username) => {
 		return updateProfile(auth, username);
 	};
 
@@ -66,6 +66,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Delete user
 	const removeUser = () => {
+		localStorage.removeItem('loggedIn');
 		return deleteUser(user);
 	};
 
@@ -87,7 +88,7 @@ export const AuthContextProvider = ({ children }) => {
 				resetPassword,
 				changeEmail,
 				removeUser,
-				changeUser,
+				changeUsername,
 			}}
 		>
 			{children}

@@ -13,11 +13,11 @@ import { UserAuth } from '../services/authContext';
 import { Alert, CssBaseline } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function ForgotPassword() {
+export default function ResetPassword() {
 	const [error, setError] = useState('');
 	const [message, setMessage] = useState('');
 	const [loading, setLoading] = useState(false);
-	const { resetPassword } = UserAuth();
+	const { user, logout, resetPassword } = UserAuth();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -26,6 +26,9 @@ export default function ForgotPassword() {
 		const data = new FormData(event.currentTarget);
 		try {
 			setLoading(true);
+			if (user) {
+				await logout();
+			}
 			await resetPassword(data.get('email'));
 			setMessage('Check your inbox for further instructions ');
 		} catch (e) {
@@ -49,7 +52,6 @@ export default function ForgotPassword() {
 						autoComplete="email"
 						autoFocus
 					/>
-
 					<Button
 						disabled={loading}
 						type="submit"
@@ -108,12 +110,7 @@ export default function ForgotPassword() {
 				<Typography component="h1" variant="h5">
 					Reset Password
 				</Typography>
-				<Box
-					component="form"
-					onSubmit={handleSubmit}
-					noValidate
-					sx={{ mt: 1 }}
-				>
+				<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 					{error && <Alert severity="error">{error}</Alert>}
 					{message && <Alert severity="info">{message}</Alert>}
 					{checkIfEmailSent()}
