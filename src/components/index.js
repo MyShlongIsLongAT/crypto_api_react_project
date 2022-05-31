@@ -8,3 +8,5 @@ export { timeOneDay as TimeOneDay } from '../services/globalFunctions.js';
 export { checkChange as CheckChange } from '../services/globalFunctions.js';
 export { addPlus as AddPlus } from '../services/globalFunctions.js';
 export { default as DeleteWarning } from './deleteWarningPopUp';
+export { default as UsernameDialog } from './formDialog';
+export { default as EmailDialog } from './changeEmailDialog';

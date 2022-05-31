@@ -7,42 +7,45 @@ import { UserAuth } from '../../services/authContext';
 import { StorageAuth } from '../../services/storageContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './AccountBlock.module.css';
-import { DeleteWarning } from '../../components';
+import { DeleteWarning, EmailDialog, UsernameDialog } from '../../components';
 
 const Input = styled('input')({
 	display: 'none',
 });
 
 const AccountBlock = () => {
-	const { user, logout, removeUser } = UserAuth();
+	const { user, logout, removeUser, changeUsername, changeEmail } = UserAuth();
 	const { upload } = StorageAuth();
 	const [loading, setLoading] = useState(false);
-	const [open, setOpen] = useState(false);
+	const [openWarning, setOpenWarning] = useState(false);
+	const [openUsernameDialog, setOpenUsernameDialog] = useState(false);
+	const [openEmailDialog, setOpenEmailDialog] = useState(false);
+
 	const [photo, setPhoto] = useState(null);
 	const [photoURL, setPhotoURL] = useState('/static/images/avatar/1.jpg');
 
-	console.log(user);
-
 	const navigate = useNavigate();
 
-	//TODO Maybe do this with a popup
-	const handle_Username_Reset = async () => {
+	const handle_Username_Reset = async (username) => {
 		try {
+			await changeUsername(username);
 		} catch (e) {
 			console.log(e.message);
 		}
 	};
 
-	//TODO should go to another page to reset Email
-	//Popup?!
-	const handle_Email_Reset = async () => {
+	//TODO POPUP?!
+	//Reatuhenticate User but huuuuuuuuuuuuuuuuuuh?!!
+	const handle_Email_Reset = async (email) => {
 		try {
+			await changeEmail(email);
 		} catch (e) {
 			console.log(e.message);
 		}
 	};
 
 	//TODO Check if it works with google login
+	//Not good when logged in with google
 	const handle_Password_Reset = () => {
 		navigate('/reset-password');
 	};
@@ -57,6 +60,7 @@ const AccountBlock = () => {
 	};
 
 	const handleDelete = async () => {
+		handleCloseWarning();
 		try {
 			await removeUser();
 			navigate('/');
@@ -65,13 +69,28 @@ const AccountBlock = () => {
 		}
 	};
 
-	//Delete Warning
 	const handleOpenWarning = () => {
-		setOpen(true);
+		setOpenWarning(true);
 	};
 
 	const handleCloseWarning = () => {
-		setOpen(false);
+		setOpenWarning(false);
+	};
+
+	const handle_Open_Username_Dialog = () => {
+		setOpenUsernameDialog(true);
+	};
+
+	const handle_Close_Username_Dialog = () => {
+		setOpenUsernameDialog(false);
+	};
+
+	const handle_Open_Email_Dialog = () => {
+		setOpenEmailDialog(true);
+	};
+
+	const handle_Close_Email_Dialog = () => {
+		setOpenEmailDialog(false);
 	};
 
 	useEffect(() => {
@@ -136,23 +155,22 @@ const AccountBlock = () => {
 						<tbody>
 							<tr>
 								<td width="40%">Username:</td>
-								<td width="60%" onClick={handle_Username_Reset}>
-									{user && user.displayName}
-									<AiOutlineEdit />
+								<td width="60%">
+									{user && user.displayName}{' '}
+									<AiOutlineEdit onClick={handle_Open_Username_Dialog} />
 								</td>
 							</tr>
 							<tr>
 								<td width="40%">Email: </td>
-								<td width="60%" onClick={handle_Email_Reset}>
-									{user && user.email}
-									<AiOutlineEdit />
+								<td width="60%">
+									{user && user.email}{' '}
+									<AiOutlineEdit onClick={handle_Open_Email_Dialog} />
 								</td>
 							</tr>
 							<tr>
 								<td width="40%">Password:</td>
-								<td width="60%" onClick={handle_Password_Reset}>
-									Reset
-									<AiOutlineEdit />
+								<td width="60%">
+									Reset <AiOutlineEdit onClick={handle_Password_Reset} />
 								</td>
 							</tr>
 						</tbody>
@@ -176,7 +194,21 @@ const AccountBlock = () => {
 					</Button>
 				</div>
 			</div>
-			<DeleteWarning open={open} handleClose={handleCloseWarning} />
+			<EmailDialog
+				open={openEmailDialog}
+				handleClose={handle_Close_Email_Dialog}
+				handle_Email_Reset={handle_Email_Reset}
+			></EmailDialog>
+			<UsernameDialog
+				open={openUsernameDialog}
+				handleClose={handle_Close_Username_Dialog}
+				handle_Username_Reset={handle_Username_Reset}
+			/>
+			<DeleteWarning
+				open={openWarning}
+				handleDelete={handleDelete}
+				handleClose={handleCloseWarning}
+			/>
 		</div>
 	);
 };

@@ -16,19 +16,18 @@ const deleteWarningPopUp = (props) => {
 			aria-labelledby="alert-dialog-title"
 			aria-describedby="alert-dialog-description"
 		>
-			<DialogTitle id="alert-dialog-title">
-				{"Use Google's location service?"}
-			</DialogTitle>
+			<DialogTitle id="alert-dialog-title">{'Delete your Account'}</DialogTitle>
 			<DialogContent>
 				<DialogContentText id="alert-dialog-description">
-					Let Google help apps determine location. This means sending anonymous
-					location data to Google, even when no apps are running.
+					Are you sure you want to delete this account?
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={props.handleClose}>Disagree</Button>
 				<Button onClick={props.handleClose} autoFocus>
-					Agree
+					Back
+				</Button>
+				<Button color="error" onClick={props.handleDelete}>
+					Delete
 				</Button>
 			</DialogActions>
 		</Dialog>

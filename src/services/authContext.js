@@ -36,6 +36,7 @@ export const AuthContextProvider = ({ children }) => {
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
+	//TODO Deactivate Change Email and Change Password and Change Username when logged in with google
 	//Google Login
 	const googleSignIn = () => {
 		const provider = new GoogleAuthProvider();
@@ -45,12 +46,21 @@ export const AuthContextProvider = ({ children }) => {
 
 	//Update Email
 	const changeEmail = (email) => {
-		return updateEmail(auth, email);
+		return updateEmail(auth.currentUser, email)
+			.then(() => {
+				console.log('updated');
+				console.log(auth.currentUser);
+			})
+			.catch((error) => {
+				console.log(error.message);
+			});
 	};
 
 	//Update Username
 	const changeUsername = (username) => {
-		return updateProfile(auth, username);
+		return updateProfile(auth.currentUser, {
+			displayName: username,
+		});
 	};
 
 	//Reset Password
