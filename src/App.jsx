@@ -7,7 +7,7 @@ import {
 	SignUp,
 	Account,
 	SignIn,
-	ForgotPassword,
+	ResetPassword,
 } from './pages';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './App.css';
@@ -70,8 +70,8 @@ const App = () => {
 										<Route exact path="/signin" element={<SignIn />} />
 										<Route
 											exact
-											path="/forgot-password"
-											element={<ForgotPassword />}
+											path="/reset-password"
+											element={<ResetPassword />}
 										/>
 										<Route
 											exact
